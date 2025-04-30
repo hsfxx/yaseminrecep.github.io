@@ -117,123 +117,18 @@
             outline: none;
             -webkit-tap-highlight-color: transparent;
             width: 100%;
+            text-decoration: none;
+            text-align: center;
         }
         
         .upload-button:active {
             transform: scale(0.98);
         }
         
-        .file-input {
-            display: none;
-        }
-        
         .upload-icon {
             font-size: 20px;
             margin-right: 8px;
             vertical-align: middle;
-        }
-        
-        .preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        
-        .preview-item {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: rgba(255,255,255,0.1);
-        }
-        
-        .preview-item img, .preview-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .remove-file {
-            position: absolute;
-            top: 3px;
-            right: 3px;
-            background-color: rgba(0,0,0,0.6);
-            color: white;
-            border: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .submit-button {
-            display: none;
-            width: 100%;
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 16px 0;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        
-        .submit-button:active {
-            transform: scale(0.98);
-        }
-        
-        .progress-container {
-            display: none;
-            margin-top: 20px;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background-color: rgba(255,255,255,0.2);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background-color: #d4af37;
-            transition: width 0.3s ease;
-        }
-        
-        .progress-text {
-            text-align: center;
-            margin-top: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .success-message, .error-message {
-            display: none;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .success-message {
-            background-color: rgba(39, 174, 96, 0.2);
-            border: 1px solid #27ae60;
-        }
-        
-        .error-message {
-            background-color: rgba(231, 76, 60, 0.2);
-            border: 1px solid #e74c3c;
         }
         
         .tips {
@@ -316,33 +211,9 @@
             </div>
             
             <div class="upload-area">
-                <form name="file-upload" id="upload-form" method="POST" enctype="multipart/form-data" netlify>
-    <input type="hidden" name="form-name" value="file-upload">
-                    
-                    <input type="file" id="file-input" name="files" class="file-input" accept="image/*,video/*" multiple>
-                    <button type="button" class="upload-button" id="upload-btn">
-                        <span class="upload-icon">📸</span>Fotoğraf/Video Seç
-                    </button>
-                    
-                    <div class="preview-container" id="preview-container"></div>
-                    
-                    <button type="submit" class="submit-button" id="submit-btn">Yükle</button>
-                    
-                    <div class="progress-container" id="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress-fill"></div>
-                        </div>
-                        <div class="progress-text" id="progress-text">Yükleniyor... 0%</div>
-                    </div>
-                    
-                    <div class="success-message" id="success-message">
-                        <p>Fotoğraflarınız/videolarınız başarıyla yüklendi! Katkınız için teşekkür ederiz.</p>
-                    </div>
-                    
-                    <div class="error-message" id="error-message">
-                        <p id="error-text">Yükleme sırasında bir hata oluştu. Lütfen tekrar deneyin.</p>
-                    </div>
-                </form>
+                <a href="https://forms.gle/QGhmzvro25mUexsJA" target="_blank" class="upload-button">
+                    <span class="upload-icon">📸</span>Fotoğraf/Video Yükle
+                </a>
             </div>
             
             <div class="tips">
@@ -354,7 +225,6 @@
                             <li><strong>iPhone:</strong> Fotoğraflar uygulamasında "Seç" düğmesine tıklayıp birden fazla fotoğraf seçin.</li>
                         </ul>
                     </li>
-                    <li><strong>İnternet Bağlantısı:</strong> Yükleme sırasında Wi-Fi kullanmanızı öneririz.</li>
                     <li><strong>Dosya Boyutu:</strong> Büyük video dosyaları yüklerken sayfayı kapatmayın.</li>
                 </ul>
                 
@@ -366,172 +236,5 @@
             <p>&copy; 2025 | Nişan Anıları</p>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const uploadBtn = document.getElementById('upload-btn');
-            const fileInput = document.getElementById('file-input');
-            const previewContainer = document.getElementById('preview-container');
-            const submitBtn = document.getElementById('submit-btn');
-            const progressContainer = document.getElementById('progress-container');
-            const progressFill = document.getElementById('progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const successMessage = document.getElementById('success-message');
-            const errorMessage = document.getElementById('error-message');
-            const errorText = document.getElementById('error-text');
-            const uploadForm = document.getElementById('upload-form');
-            
-            // Seçilen dosya sayısı
-            let selectedFilesCount = 0;
-            
-            // Yükleme butonu tıklandığında dosya seçiciyi aç
-            uploadBtn.addEventListener('click', function() {
-                fileInput.click();
-            });
-            
-            // Dosya seçildiğinde önizleme oluştur
-            fileInput.addEventListener('change', function(event) {
-                const files = event.target.files;
-                
-                if (!files || files.length === 0) return;
-                
-                // Dosya sayısını kontrol et
-                if (files.length > 10) {
-                    alert('En fazla 10 dosya yükleyebilirsiniz. Lütfen daha az dosya seçin.');
-                    fileInput.value = '';
-                    return;
-                }
-                
-                // Önizleme alanını temizle
-                previewContainer.innerHTML = '';
-                selectedFilesCount = 0;
-                
-                // Her dosya için önizleme oluştur
-                Array.from(files).forEach((file, index) => {
-                    // Sadece fotoğraf ve video dosyalarını kabul et
-                    if (!file.type.match('image/*') && !file.type.match('video/*')) {
-                        return;
-                    }
-                    
-                    selectedFilesCount++;
-                    
-                    const previewItem = document.createElement('div');
-                    previewItem.classList.add('preview-item');
-                    
-                    if (file.type.match('image/*')) {
-                        const img = document.createElement('img');
-                        img.src = URL.createObjectURL(file);
-                        previewItem.appendChild(img);
-                    } else if (file.type.match('video/*')) {
-                        const videoThumb = document.createElement('div');
-                        videoThumb.style.width = '100%';
-                        videoThumb.style.height = '100%';
-                        videoThumb.style.backgroundColor = '#333';
-                        videoThumb.style.display = 'flex';
-                        videoThumb.style.alignItems = 'center';
-                        videoThumb.style.justifyContent = 'center';
-                        videoThumb.innerHTML = '<span style="font-size: 24px;">🎬</span>';
-                        previewItem.appendChild(videoThumb);
-                    }
-                    
-                    // Dosya kaldırma butonu ekle
-                    const removeBtn = document.createElement('button');
-                    removeBtn.classList.add('remove-file');
-                    removeBtn.innerHTML = '×';
-                    removeBtn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        // Bu şekilde görsel olarak kaldırabiliriz, ancak fileInput değerini sıfırlamak
-                        // tarayıcı güvenlik kısıtlamaları nedeniyle mümkün değil
-                        previewItem.remove();
-                        selectedFilesCount--;
-                        
-                        if (selectedFilesCount === 0) {
-                            submitBtn.style.display = 'none';
-                            previewContainer.innerHTML = '';
-                        }
-                    });
-                    
-                    previewItem.appendChild(removeBtn);
-                    previewContainer.appendChild(previewItem);
-                });
-                
-                // Dosya seçildiyse gönder butonunu göster
-                if (selectedFilesCount > 0) {
-                    submitBtn.style.display = 'block';
-                } else {
-                    submitBtn.style.display = 'none';
-                }
-            });
-            
-            // Form gönderildiğinde
-            uploadForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Dosya seçilmediyse işlemi durdur
-                if (selectedFilesCount === 0) {
-                    return;
-                }
-                
-                // Form verilerini hazırla
-                const formData = new FormData(uploadForm);
-                
-                // UI elementlerini güncelle
-                submitBtn.style.display = 'none';
-                progressContainer.style.display = 'block';
-                successMessage.style.display = 'none';
-                errorMessage.style.display = 'none';
-                
-                // Dosya boyutu için simülasyon (gerçek ölçümü zor)
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 5;
-                    progressFill.style.width = `${progress}%`;
-                    progressText.textContent = `Yükleniyor... ${progress}%`;
-                    
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                        setTimeout(() => {
-                            // Netlify Forms için fetch isteği
-                            fetch('/', {
-                                method: 'POST',
-                                body: formData
-                            })
-                            .then(response => {
-                                if (response.ok) {
-                                    // Başarılı yükleme
-                                    progressContainer.style.display = 'none';
-                                    successMessage.style.display = 'block';
-                                    // Formu sıfırla
-                                    fileInput.value = '';
-                                    previewContainer.innerHTML = '';
-                                    selectedFilesCount = 0;
-                                    
-                                    // Kullanıcı yeni yükleme yapabilsin
-                                    setTimeout(() => {
-                                        successMessage.style.display = 'none';
-                                        uploadBtn.style.display = 'block';
-                                    }, 5000);
-                                } else {
-                                    throw new Error('Sunucu hatası');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Yükleme hatası:', error);
-                                progressContainer.style.display = 'none';
-                                errorMessage.style.display = 'block';
-                                errorText.textContent = 'Yükleme sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
-                                
-                                // Kullanıcı tekrar deneyebilsin
-                                setTimeout(() => {
-                                    errorMessage.style.display = 'none';
-                                    submitBtn.style.display = 'block';
-                                }, 5000);
-                            });
-                        }, 500);
-                    }
-                }, 200);
-            });
-        });
-    </script>
 </body>
 </html>
